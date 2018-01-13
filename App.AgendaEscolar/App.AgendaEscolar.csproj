@@ -96,14 +96,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ObjectExistsToVisible.cs" />
-    <Compile Include="Data\FakeService.cs" />
+    <Compile Include="Data\CompromissoService.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Agenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\OrganizationViewModel.cs" />
-    <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\AgendaViewModel.cs" />
+    <Compile Include="ViewModels\CompromissoViewModel.cs" />
     <Compile Include="ViewModels\ViewModelHelpers.cs" />
   </ItemGroup>
   <ItemGroup>

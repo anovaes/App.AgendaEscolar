@@ -23,12 +23,12 @@ namespace App.AgendaEscolar
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public OrganizationViewModel Organization { get; set; }
+        public AgendaViewModel Agenda { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-            Organization = new OrganizationViewModel("Office");
+            Agenda = new AgendaViewModel("Office");
         }
     }
 }
