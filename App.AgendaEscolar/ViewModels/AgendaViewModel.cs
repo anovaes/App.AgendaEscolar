@@ -1,4 +1,5 @@
-﻿using App.AgendaEscolar.Models;
+﻿using App.AgendaEscolar.Data;
+using App.AgendaEscolar.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +24,6 @@ namespace App.AgendaEscolar.ViewModels
                 var np = new CompromissoViewModel(compromisso);
                 np.PropertyChanged += Person_OnNotifyPropertyChanged;
                 _Compromisso.Add(np);
-
             }
         }
 
@@ -33,6 +33,11 @@ namespace App.AgendaEscolar.ViewModels
         {
             get { return _Compromisso; }
             set { SetProperty(ref _Compromisso, value); }
+        }
+
+        public IEnumerable<TipoCompromisso> ListaDeTipos
+        {
+            get { return Enum.GetValues(typeof(TipoCompromisso)).Cast<TipoCompromisso>();  }
         }
 
         string _Nome;
