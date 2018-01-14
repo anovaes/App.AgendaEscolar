@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using App.AgendaEscolar.Pages;
+using App.AgendaEscolar.Services;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,10 +28,14 @@ namespace App.AgendaEscolar
     {
         public AgendaViewModel Agenda { get; set; }
 
+        public MainPageViewModel ViewModel { get; } = new MainPageViewModel();
+
         public MainPage()
         {
             this.InitializeComponent();
             Agenda = new AgendaViewModel("Office");
+            ViewModel = new MainPageViewModel();
         }
+
     }
 }
