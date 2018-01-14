@@ -59,6 +59,13 @@ namespace App.AgendaEscolar.ViewModels
             get { return (_SelectedIndex >= 0) ? _Compromisso[_SelectedIndex] : null; }
         }
 
+        private bool _isSplitViewOpen;
+        public bool IsSplitViewOpen
+        {
+            get { return _isSplitViewOpen; }
+            set { SetProperty(ref _isSplitViewOpen, value); }
+        }
+
         public void Add()
         {
             var compromisso = new CompromissoViewModel();
@@ -81,6 +88,11 @@ namespace App.AgendaEscolar.ViewModels
         void Person_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
             agenda.Update((CompromissoViewModel)sender);
+        }
+
+        public void HamburguerButton_Click()
+        {
+            IsSplitViewOpen = !IsSplitViewOpen;
         }
     }
 }

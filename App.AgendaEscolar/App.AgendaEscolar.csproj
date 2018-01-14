@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\NullableDateTimeToNullableDateTimeOffsetConverter.cs" />
     <Compile Include="Converters\ObjectExistsToVisible.cs" />
     <Compile Include="Data\CompromissoService.cs" />
     <Compile Include="MainPage.xaml.cs">
