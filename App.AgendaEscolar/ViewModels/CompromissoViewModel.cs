@@ -19,18 +19,22 @@ namespace App.AgendaEscolar.ViewModels
             set { SetProperty(This.Nome, value, () => This.Nome = value); }
         }
 
-        public DateTime Data
+        public System.Nullable<DateTimeOffset> Data
         {
             get { return This.Data; }
-            set { SetProperty(This.Data, value, () => This.Data = value); }
+            set
+            {
+                SetProperty(This.Data, value, () => This.Data = value);
+                DataExibicao = value.ToString();
+            }
         }
 
-        //public static readonly DependencyProperty DataProperty =
-        //    DependencyProperty.Register("DataProperty", typeof(DateTime?), typeof(CompromissoViewModel), new PropertyMetadata(null, SetarData));
-
+        private string _dataExibicao;
+        
         public string DataExibicao
         {
-            get { return This.Data.ToString("dd/MM/yyyy"); }
+            get { return _dataExibicao != null ? _dataExibicao : This.Data.ToString() ; }
+            set { _dataExibicao = value; }
         }
 
         public TipoCompromisso Tipo
