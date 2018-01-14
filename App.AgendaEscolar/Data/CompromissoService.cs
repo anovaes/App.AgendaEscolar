@@ -10,7 +10,7 @@ namespace App.AgendaEscolar.Data
     public class Compromisso
     {
         public string Nome { get; set; }
-        public DateTime Data { get; set; }
+        public System.Nullable<DateTimeOffset> Data { get; set; }
         public TipoCompromisso Tipo { get; set; }
         public string Descricao { get; set; }
     }

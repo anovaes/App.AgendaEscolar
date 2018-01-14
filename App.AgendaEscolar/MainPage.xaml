@@ -72,7 +72,7 @@
                                         <RowDefinition Height="25"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Text="{x:Bind Nome, Mode=OneWay}" Grid.Row="0"/>
-                                    <TextBlock Text="{x:Bind DataExibicao, Mode=OneWay}" Grid.Row="1"/>
+                                    <TextBlock Text="{x:Bind Data, Mode=OneWay}" Grid.Row="1"/>
                                 </Grid>
                                 
                             </DataTemplate>
@@ -82,8 +82,8 @@
                 </StackPanel>
                 <StackPanel Grid.Column="2" Orientation="Vertical" Visibility="{x:Bind Agenda.SelecionadoCompromisso, Mode=OneWay, Converter={StaticResource ObjectExistsToVisible}}" >
                     <TextBox Text="{x:Bind Agenda.SelecionadoCompromisso.Nome, Mode=TwoWay, FallbackValue=''}" Margin="5" />
-                    <!--<CalendarDatePicker Name="cpkStartDate" Header="Inicia em" PlaceholderText="Selecione a data de início da sua tarefa" 
-                                        Margin="0, 12" DateChanged="{x:Bind Agenda.SelecionadoCompromisso.SetarData}"/>-->
+                    <CalendarDatePicker Name="cpkStartDate" Header="Inicia em" PlaceholderText="Selecione a data de início da sua tarefa" 
+                                        Margin="0, 12" Date="{x:Bind Agenda.SelecionadoCompromisso.Data, Mode=TwoWay}"/>
                     <TextBox Text="{x:Bind Agenda.SelecionadoCompromisso.Descricao, Mode=TwoWay, FallbackValue='0'}" Margin="5" TextWrapping="Wrap" Height="120" />
                     <Button Content="Excluir" Click="{x:Bind Agenda.Delete}" Margin="5" />
                 </StackPanel>
