@@ -1,4 +1,6 @@
 ﻿using App.AgendaEscolar.Models;
+using App.AgendaEscolar.Pages;
+using App.AgendaEscolar.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,5 +17,6 @@ namespace App.AgendaEscolar.ViewModels
         {
             NavigationService.Navigate<AppSettingsPage>();
         }
+
     }
 }

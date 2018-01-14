@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 namespace App.AgendaEscolar.Pages
 {
     public sealed partial class AppSettingsPage : Page
@@ -22,7 +23,7 @@ namespace App.AgendaEscolar.Pages
 
         public AppSettingsPage()
         {
-            this.InitializeComponent();
+           // this.InitializeComponent();
         }
     }
 }
