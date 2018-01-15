@@ -42,7 +42,7 @@
                     Background="Transparent" Click="{x:Bind Agenda.HamburguerButton_Click}" />
 
                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,0,0,48">
-                    <Button Background="Transparent" Click="{x:Bind ViewModel.AppSettingsButton_Click}">
+                    <Button Background="Transparent" Click="{x:Bind Configuracoes_Click}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="Setting" Height="24" Width="24" Margin="0,0,12,0"/>

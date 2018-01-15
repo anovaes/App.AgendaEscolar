@@ -141,10 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <EmbeddedResource Include="Pages\AppSettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    <Page Include="Pages\AppSettingsPage.xaml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights">
