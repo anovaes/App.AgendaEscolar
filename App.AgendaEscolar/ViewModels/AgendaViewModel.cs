@@ -1,5 +1,6 @@
 ﻿using App.AgendaEscolar.Data;
 using App.AgendaEscolar.Models;
+using App.AgendaEscolar.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,13 +14,19 @@ namespace App.AgendaEscolar.ViewModels
     public class AgendaViewModel : NotificationBase
     {
         Agenda agenda;
+        public CompromissoRepository CompromissoRepository { get; private set; } = CompromissoRepository.Instance;
 
         public AgendaViewModel(string name)
         {
             agenda = new Agenda(name);
             _SelectedIndex = -1;
+        }
 
-            foreach (var compromisso in agenda.Compromissos)
+        public void CarregaLista()
+        {
+            var itens = CompromissoRepository.Items;
+
+            foreach (var compromisso in itens)
             {
                 var np = new CompromissoViewModel(compromisso);
                 np.PropertyChanged += Person_OnNotifyPropertyChanged;
@@ -38,6 +45,11 @@ namespace App.AgendaEscolar.ViewModels
         public IEnumerable<TipoCompromisso> ListaDeTipos
         {
             get { return Enum.GetValues(typeof(TipoCompromisso)).Cast<TipoCompromisso>();  }
+        }
+
+        public async Task Initialize()
+        {
+            await CompromissoRepository.LoadAll();
         }
 
         string _Nome;
@@ -71,33 +83,47 @@ namespace App.AgendaEscolar.ViewModels
             set { SetProperty(ref _isSplitViewOpen, value); }
         }
 
-        public void Add()
+        //public void Add()
+        //{
+        //    var compromisso = new CompromissoViewModel();
+        //    compromisso.PropertyChanged += Person_OnNotifyPropertyChanged;
+        //    Compromissos.Add(compromisso);
+        //    agenda.Add(compromisso);
+        //    SelectedIndex = Compromissos.IndexOf(compromisso);
+        //}
+
+        public async void Add()
         {
             var compromisso = new CompromissoViewModel();
             compromisso.PropertyChanged += Person_OnNotifyPropertyChanged;
             Compromissos.Add(compromisso);
-            agenda.Add(compromisso);
+            await CompromissoRepository.Create(compromisso);
             SelectedIndex = Compromissos.IndexOf(compromisso);
         }
 
-        public void Delete()
+        public async void Delete()
         {
             if (SelectedIndex != -1)
             {
                 var compromisso = Compromissos[SelectedIndex];
                 Compromissos.RemoveAt(SelectedIndex);
-                agenda.Delete(compromisso);
+                await CompromissoRepository.Delete(compromisso);
+                //agenda.Delete(compromisso);
             }
         }
 
-        void Person_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
+        async void Person_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            agenda.Update((CompromissoViewModel)sender);
+            var compromisso = (CompromissoViewModel)sender;
+            await CompromissoRepository.Update(compromisso);
+            //agenda.Update((CompromissoViewModel)sender);
         }
 
         public void HamburguerButton_Click()
         {
             IsSplitViewOpen = !IsSplitViewOpen;
         }
+
+        
     }
 }

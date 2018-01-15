@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace App.AgendaEscolar.Data
 {
     public class Compromisso
     {
+        [Key]
+        public string Id { get; set; }
         public string Nome { get; set; }
         public System.Nullable<DateTimeOffset> Data { get; set; }
         public TipoCompromisso Tipo { get; set; }

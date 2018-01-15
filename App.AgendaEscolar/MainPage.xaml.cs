@@ -28,18 +28,22 @@ namespace App.AgendaEscolar
     {
         public AgendaViewModel Agenda { get; set; }
 
-        //public MainPageViewModel ViewModel { get; } = new MainPageViewModel();
-
         public MainPage()
         {
-            this.InitializeComponent();
             Agenda = new AgendaViewModel("Office");
-            //ViewModel = new MainPageViewModel();
+            MainPage_Loaded();
+            Agenda.CarregaLista();
+            this.InitializeComponent();
         }
 
         public void Configuracoes_Click()
         {
             this.Frame.Navigate(typeof(AppSettingsPage));
+        }
+
+        private async void MainPage_Loaded()
+        {
+            await Agenda.Initialize();
         }
 
     }
