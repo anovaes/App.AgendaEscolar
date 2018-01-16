@@ -109,10 +109,6 @@
     <Compile Include="Migrations\20180115042028_AgendaTop.designer.cs">
       <DependentUpon>20180115042028_AgendaTop.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180115221331_Add-Migrations.cs" />
-    <Compile Include="Migrations\20180115221331_Add-Migrations.designer.cs">
-      <DependentUpon>20180115221331_Add-Migrations.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\AgendaDbContextModelSnapshot.cs" />
     <Compile Include="Models\Agenda.cs" />
     <Compile Include="Pages\AppSettingsPage.xaml.cs">

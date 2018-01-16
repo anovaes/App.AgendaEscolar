@@ -16,7 +16,6 @@
         <converters:FormatDateConverter x:Key="FormatDate"/>
     </Page.Resources>
 
-    <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
