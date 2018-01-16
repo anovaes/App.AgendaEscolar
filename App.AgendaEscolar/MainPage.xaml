@@ -16,6 +16,14 @@
         <converters:FormatDateConverter x:Key="FormatDate"/>
     </Page.Resources>
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Adicionar" Icon="Add" Click="{x:Bind Agenda.Add}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
     <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroupScreenWidth">

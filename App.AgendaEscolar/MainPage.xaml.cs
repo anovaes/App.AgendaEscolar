@@ -38,7 +38,8 @@ namespace App.AgendaEscolar
 
         public void Configuracoes_Click()
         {
-            this.Frame.Navigate(typeof(AppSettingsPage));
+            NavigationService.Navigate<AppSettingsPage>();
+            //this.Frame.Navigate(typeof(AppSettingsPage));
         }
 
         private async void MainPage_Loaded()
