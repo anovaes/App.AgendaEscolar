@@ -15,7 +15,7 @@
         <converters:EnumToIntConvert x:Key="EnumToIntConvert"/>
     </Page.Resources>
 
-    <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}">
+    <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroupScreenWidth">
                 <VisualState x:Name="VisualStateMinWidth700">
@@ -38,6 +38,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
+                <Image Source="Assets/logo.png" Width="80px"/>
                 <Button Width="44" Height="44" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                     Background="Transparent" Click="{x:Bind Agenda.HamburguerButton_Click}" />
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.AgendaEscolar.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +30,9 @@ namespace App.AgendaEscolar
         /// </summary>
         public App()
         {
+
+            this.RequestedTheme = StorageService.GetSetting(StorageService.Settings.AppTheme, ApplicationTheme.Light);
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -50,6 +55,22 @@ namespace App.AgendaEscolar
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+
+                rootFrame.Navigated += (s, evt) =>
+                {
+                    if (rootFrame.CanGoBack)
+                    {
+                        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                            AppViewBackButtonVisibility.Visible;
+
+                    }
+                    else
+                    {
+                        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                            AppViewBackButtonVisibility.Collapsed;
+                    }
+                };
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
@@ -57,6 +78,14 @@ namespace App.AgendaEscolar
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                NavigationService.Frame = rootFrame;
+
+                if (SystemNavigationManager.GetForCurrentView() != null)
+                {
+                    SystemNavigationManager.GetForCurrentView().BackRequested -= App_BackRequested;
+                    SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+                }
             }
 
             if (e.PrelaunchActivated == false)
@@ -70,6 +99,17 @@ namespace App.AgendaEscolar
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+            }
+
+
+        }
+
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                e.Handled = true;
             }
         }
 
