@@ -36,6 +36,15 @@
                         <AdaptiveTrigger MinWindowWidth="700"/>
                     </VisualState.StateTriggers>
                 </VisualState>
+                <VisualState x:Name="VisualStateMinWidth1">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="splitView.(SplitView.IsPaneOpen)" Value="False"/>
+                        <Setter Target="splitView.(SplitView.DisplayMode)" Value="CompactInline"/>
+                    </VisualState.Setters>
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
