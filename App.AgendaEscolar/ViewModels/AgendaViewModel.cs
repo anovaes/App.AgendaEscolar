@@ -8,6 +8,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 
 namespace App.AgendaEscolar.ViewModels
 {
@@ -124,6 +126,11 @@ namespace App.AgendaEscolar.ViewModels
             IsSplitViewOpen = !IsSplitViewOpen;
         }
 
+        public void Selected_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var compromisso = ((FrameworkElement)e.OriginalSource).DataContext as CompromissoViewModel;
+            SelectedIndex = Compromissos.IndexOf(compromisso);
+        }
         
     }
 }

@@ -13,9 +13,19 @@
         <converters:ObjectExistsToVisible x:Key="ObjectExistsToVisible" />
         <converters:NullableDateTimeToNullableDateTimeOffsetConverter x:Key="NullableDateTimeToNullableDateTimeOffsetConverter"/>
         <converters:EnumToIntConvert x:Key="EnumToIntConvert"/>
+        <converters:FormatDateConverter x:Key="FormatDate"/>
     </Page.Resources>
 
     <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Adicionar" Icon="Add" Click="{x:Bind Agenda.Add}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <SplitView x:Name="splitView" OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44" IsPaneOpen="{x:Bind Agenda.IsSplitViewOpen, Mode=TwoWay}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroupScreenWidth">
                 <VisualState x:Name="VisualStateMinWidth700">
@@ -64,7 +74,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <ListView  x:Name="MainList" ItemsSource="{x:Bind Agenda.Compromissos, Mode=OneWay}"  SelectedIndex="{x:Bind Agenda.SelectedIndex, Mode=TwoWay}" 
+                    <ListView  x:Name="MainList" ItemsSource="{x:Bind Agenda.Compromissos, Mode=OneWay}"  
+                               SelectedIndex="{x:Bind Agenda.SelectedIndex, Mode=TwoWay}" 
+                               RightTapped="{x:Bind Agenda.Selected_RightTapped}"
                                MinWidth="250" Margin="5">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="viewModels:CompromissoViewModel">
@@ -74,22 +86,29 @@
                                         <RowDefinition Height="25"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Text="{x:Bind Nome, Mode=OneWay}" Grid.Row="0"/>
-                                    <TextBlock Text="{x:Bind Data, Mode=OneWay}" Grid.Row="1"/>
+                                    <TextBlock Text="{x:Bind Data, Mode=OneWay, Converter={StaticResource FormatDate}}" Grid.Row="1"/>
                                 </Grid>
                                 
                             </DataTemplate>
                         </ListView.ItemTemplate>
+                        <ListView.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyout.Items>
+                                    <MenuFlyoutItem Text="Remover" Click="{x:Bind Agenda.Delete}"/>
+                                </MenuFlyout.Items>
+                            </MenuFlyout>
+                        </ListView.ContextFlyout>
                     </ListView>
                     <Button Content="Novo" Click="{x:Bind Agenda.Add}" Margin="5"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Orientation="Vertical" Visibility="{x:Bind Agenda.SelecionadoCompromisso, Mode=OneWay, Converter={StaticResource ObjectExistsToVisible}}" >
-                    <TextBox Text="{x:Bind Agenda.SelecionadoCompromisso.Nome, Mode=TwoWay, FallbackValue=''}" Margin="5" />
+                    <TextBox Header="Nome" Text="{x:Bind Agenda.SelecionadoCompromisso.Nome, Mode=TwoWay, FallbackValue=''}" Margin="5" />
                     <CalendarDatePicker Name="cpkStartDate" Header="Inicia em" PlaceholderText="Selecione a data de início da sua tarefa" 
                                         Margin="0, 12" Date="{x:Bind Agenda.SelecionadoCompromisso.Data, Mode=TwoWay}"/>
 
                     <ComboBox Header="Tipo" ItemsSource="{x:Bind Agenda.ListaDeTipos, Mode=OneWay}" SelectedIndex="{x:Bind Agenda.SelecionadoCompromisso.Tipo, Mode=TwoWay, Converter={StaticResource EnumToIntConvert}}"  />
-                    <TextBox Text="{x:Bind Agenda.SelecionadoCompromisso.Descricao, Mode=TwoWay, FallbackValue='0'}" Margin="5" TextWrapping="Wrap" Height="120" />
-                    <Button Content="Excluir" Click="{x:Bind Agenda.Delete}" Margin="5" />
+                    <TextBox Header="Descrição" Text="{x:Bind Agenda.SelecionadoCompromisso.Descricao, Mode=TwoWay, FallbackValue='0'}" Margin="5" TextWrapping="Wrap" Height="120" />
+                    <!--<Button Content="Excluir" Click="{x:Bind Agenda.Delete}" Margin="5" />-->
                 </StackPanel>
             </Grid>
         </SplitView.Content>
